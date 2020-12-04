@@ -63,13 +63,13 @@ public class Melee_enemy : MonoBehaviour
         string state = currentState[0].clip.name;
         switch (state)
         {
-            case "run":
+            case "run": //First 'r' is extra letter
                 m_state = State.Walk;
                 break;
-            case "death":
+            case "death": //First 'd' is extra letter
                 m_state = State.Die;
                 break;
-            case "attack":
+            case "attack": //First 'a' is extra letter
                 m_state = State.Attack;
                 break;
             default:
