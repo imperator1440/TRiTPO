@@ -3,7 +3,7 @@
 namespace Assets.Scripts {
     public class CamMove : MonoBehaviour {
         [SerializeField]
-        private GameObject m_player;
+        private GameObject m_player; // Wrong naming ('m_')
 
         // Update is called once per frame
         private void Update() {
