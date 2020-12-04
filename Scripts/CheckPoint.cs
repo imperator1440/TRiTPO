@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
-    private GameMaster gm;
+    private GameMaster gm;  // Wrong naming ('m_'), private field must start with "_"
 
     private void Start()
     {
