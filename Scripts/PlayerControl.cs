@@ -5,62 +5,62 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts {
     public class PlayerControl : MonoBehaviour {
-        [SerializeField] private float m_movementSpeed = 2.5f;
-        private float m_xMovement;
+        [SerializeField] private float m_movementSpeed = 2.5f; // Wrong naming ('m_'), private field must start with "_"
+        private float m_xMovement; // Wrong naming ('m_'), 'Movement'. Maybe direction was meant
 
-        [Range(0, .3f)] [SerializeField] private float m_movementSmoothing = .05f; // How much to smooth out the movement
+        [Range(0, .3f)] [SerializeField] private float m_movementSmoothing = .05f; // Wrong naming ('m_')
 
-        [SerializeField] private float m_jumpForce = 20f;
+        [SerializeField] private float m_jumpForce = 20f; // Wrong naming ('m_')
 
         [SerializeField] private float m_slopeCheckDistance = 0.5f;
-        [SerializeField] private float m_groundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+        [SerializeField] private float m_groundedRadius = .2f; // Wrong naming ('m_')
 
-        private float m_slopeDownAngle;
+        private float m_slopeDownAngle; 
 
 
-        [SerializeField] private int m_maxHealth = 50;
-        public float m_currentHealth;
+        [SerializeField] private int m_maxHealth = 50; // Wrong naming ('m_')
+        public float m_currentHealth; // Wrong naming ('m_')
 
-        private bool m_canRegainHealth;
+        private bool m_canRegainHealth; // Wrong naming ('m_')
         [Range(0, 20f)] [SerializeField] private float m_regeneration = 5f;
         GameMaster gm;
-        private bool m_canGetDamage = true;
-        private float m_cantGetDamageTimer = 0.75f;
+        private bool m_canGetDamage = true; // Wrong naming ('m_')
+        private float m_cantGetDamageTimer = 0.75f; // Wrong naming ('m_') and you need to change a bit name to correspond logic
         //private int m_gold = 0;
 
-        private bool m_isJumping;
-        private bool m_isOnGround;
-        private bool m_isOnSlope;
-        private bool m_canJump;
-        private bool m_nearLever;
-        private bool m_nearChest;
-        private bool m_facingRight = true;
+        private bool m_isJumping; // Wrong naming ('m_')
+        private bool m_isOnGround; // Wrong naming ('m_')
+        private bool m_isOnSlope; // Wrong naming ('m_')
+        private bool m_canJump; // Wrong naming ('m_') 
+        private bool m_nearLever; // Wrong naming ('m_'), You should name 'State' like '_isNearLever'. 
+        private bool m_nearChest; // Wrong naming ('m_'), You should name 'State' like '_isNearChest'. 
+        private bool m_facingRight = true; // Wrong naming ('m_'), You should name 'State' like '_isFacingRight'. 
 
-        private bool m_hasControls = true;
+        private bool m_hasControls = true; // Wrong naming ('m_')
 
-        private Vector3 m_velocity = Vector3.zero;
+        private Vector3 m_velocity = Vector3.zero;  // Wrong naming Vector3 is not velosity, ('m_') private field must start with "_"
 
-        private Vector2 m_newVelocity;
-        private Vector2 m_newForce;
-        private Vector2 m_slopeNormalPerp;
+        private Vector2 m_newVelocity; // Wrong naming Vector2 is not velosity, ('m_') private field must start with "_"
+        private Vector2 m_newForce; // Wrong naming Vector2 is not force, ('m_') private field must start with "_"
+        private Vector2 m_slopeNormalPerp; // Wrong naming Vector2 is not slope, ('m_') private field must start with "_"
 
 
-        private Rigidbody2D m_rigidbody2D;
+        private Rigidbody2D m_rigidbody2D; // Wrong naming ('m_')
 
-        [SerializeField] private PhysicsMaterial2D m_noFriction;
-        [SerializeField] private PhysicsMaterial2D m_fullFriction;
+        [SerializeField] private PhysicsMaterial2D m_noFriction; // Wrong naming ('m_')
+        [SerializeField] private PhysicsMaterial2D m_fullFriction; // Wrong naming ('m_') 
 
-        [SerializeField] private LayerMask m_whatIsGround = new LayerMask(); // A mask determining what is ground to the character
+        [SerializeField] private LayerMask m_whatIsGround = new LayerMask(); // Wrong naming ('m_') 
 
-        [SerializeField] private Animator m_animator;
-        [SerializeField] private Transform m_groundCheck = null; // A position marking where to check if the player is grounded.
+        [SerializeField] private Animator m_animator; // Wrong naming ('m_') 
+        [SerializeField] private Transform m_groundCheck = null; // Wrong naming ('m_') 
 
-        [SerializeField] private Transform m_firepoint;
-        [SerializeField] private GameObject m_projectile;
+        [SerializeField] private Transform m_firepoint; // Wrong naming ('m_') 
+        [SerializeField] private GameObject m_projectile; // Wrong naming ('m_') 
 
-        [SerializeField] private HealthBar m_healthBar;
+        [SerializeField] private HealthBar m_healthBar; // Wrong naming ('m_') 
 
-        private enum State {
+        private enum State { // Wrong naming, You should name 'State' like 'AnimationState'. 
             Idle,
             Walk,
             Jump,
@@ -69,11 +69,11 @@ namespace Assets.Scripts {
             Die
         };
 
-        private State m_state = State.Idle;
+        private State m_state = State.Idle; // Wrong naming ('m_') 
 
-        private LeverInteraction m_lever;
-        private ChestInteraction m_chest;
-
+        private LeverInteraction m_lever; // Wrong naming ('m_') 
+        private ChestInteraction m_chest; // Wrong naming ('m_') 
+ 
         private void Start()
         {
             Physics2D.IgnoreLayerCollision(9, 10);
@@ -142,7 +142,7 @@ namespace Assets.Scripts {
             }
         }
 
-        private void AdjustHealth(float adj)
+        private void AdjustHealth(float adj) // Wrong name. don't use abbreviations
         {
             //Debug.Log("Adjusting " + adj + " health point");
             m_currentHealth += adj;
@@ -269,7 +269,7 @@ namespace Assets.Scripts {
             }
         }
 
-        private void OnTriggerExit2D(Collider2D other) {
+        private void OnTriggerExit2D(Collider2D other) { 
             if (other.tag == "Lever" && m_lever != null) {
                 m_lever.ChangeMaterial();
                 m_nearLever = false;
@@ -330,20 +330,20 @@ namespace Assets.Scripts {
             AnimatorClipInfo[] currentState = m_animator.GetCurrentAnimatorClipInfo(0);
             string state = currentState[0].clip.name;
             switch (state) {
-                case "run":
-                    m_state = State.Walk;
+                case "run": //First 'r' is extra letter
+                    m_state = State.Walk; 
                     break;
-                case "jump":
-                    m_state = State.Jump;
+                case "jump": //First 'j' is extra letter
+                    m_state = State.Jump; 
                     break;
-                case "fall":
-                    m_state = State.Jump;
+                case "fall": //First 'f' is extra letter
+                    m_state = State.Jump; 
                     break;
-                case "attack":
-                    m_state = State.Attack;
+                case "attack": //First 'a' is extra letter
+                    m_state = State.Attack; 
                     break;
-                case "die":
-                    m_state = State.Die;
+                case "die": //First 'd' is extra letter
+                    m_state = State.Die; 
                     break;
                 default:
                     m_state = State.Idle;
