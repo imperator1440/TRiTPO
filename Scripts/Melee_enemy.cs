@@ -6,25 +6,25 @@ using UnityEngine;
 
 public class Melee_enemy : MonoBehaviour
 {
-    [SerializeField] private int m_health = 100;
-    [SerializeField] private int m_moveRange = 20;
-    [SerializeField] private float m_attackRange = 5;
-    [SerializeField] private int m_damage = 5;
-    [Range(0, .3f)] [SerializeField] private float m_movementSmoothing = .05f;
-    [SerializeField] private float m_walkSpeed = 10f;
-    public float m_moveCoordinates;
-    [SerializeField] private Rigidbody2D m_rigidBody;
-    [SerializeField] private Animator m_animator;
-    [SerializeField] private Transform m_firepointRight;
-    [SerializeField] private Transform m_firepointLeft;
-    [SerializeField] private LayerMask m_layersToHit;
-    private Vector3 m_velocity = Vector3.zero;
+    [SerializeField] private int m_health = 100;  // Wrong naming ('m_'), private field must start with "_"
+    [SerializeField] private int m_moveRange = 20;  // Wrong naming ('m_'), private field must start with "_"
+    [SerializeField] private float m_attackRange = 5;  // Wrong naming ('m_'), private field must start with "_" and .f
+    [SerializeField] private int m_damage = 5; // Wrong naming ('m_'), private field must start with "_"
+    [Range(0, .3f)] [SerializeField] private float m_movementSmoothing = .05f; // Wrong naming ('m_'), private field must start with "_"
+    [SerializeField] private float m_walkSpeed = 10f; // Wrong naming ('m_'), private field must start with "_"
+    public float m_moveCoordinates; // Wrong naming ('m_')
+    [SerializeField] private Rigidbody2D m_rigidBody; // Wrong naming ('m_')
+    [SerializeField] private Animator m_animator; // Wrong naming ('m_')
+    [SerializeField] private Transform m_firepointRight; // Wrong naming ('m_')
+    [SerializeField] private Transform m_firepointLeft; // Wrong naming ('m_')
+    [SerializeField] private LayerMask m_layersToHit; // Wrong naming ('m_')
+    private Vector3 m_velocity = Vector3.zero; // Wrong Vector3 is not velosity, ('m_') private field must start with "_"
 
-    private bool m_facingRight = true;
-    private bool m_moving;
-    private bool m_started = true; 
+    private bool m_facingRight = true; // Wrong naming ('m_'),You should name 'State' like '_isFacingRight'.  _isFacingRight
+    private bool m_moving; // Wrong naming ('m_'), You should name 'State' like '_isMoving'. 
+    private bool m_started = true;  // Wrong naming ('m_'), You should name 'State' like '_isStarted'. 
 
-    private enum State
+    private enum State // Wrong naming, You should name 'State' like 'AnimationState'. 
     {
         Idle,
         Walk,
@@ -35,7 +35,7 @@ public class Melee_enemy : MonoBehaviour
 
     private State m_state = State.Idle;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage) // Wrong naming ('m_')
     {
         m_health -= damage;
         if (m_health < 0 && m_state != State.Die)
@@ -47,8 +47,7 @@ public class Melee_enemy : MonoBehaviour
 
     private void Move(float move)
     {
-        Vector3 targetVelocity = new Vector2(move * 10f, m_rigidBody.velocity.y);
-        // And then smoothing it out and applying it to the character
+        Vector3 targetVelocity = new Vector2(move * 10f, m_rigidBody.velocity.y); // Wrong Vector3 is not velosity
         m_rigidBody.velocity =
             Vector3.SmoothDamp(m_rigidBody.velocity, targetVelocity, ref m_velocity, m_movementSmoothing);
     }
@@ -90,7 +89,7 @@ public class Melee_enemy : MonoBehaviour
         }
     }
 
-    private void Eye()
+    private void Eye() //Wrong naming (Name of method talking nothing).
     {
         var angle = Mathf.Sin(Time.time * 100) * 360; //tweak this to change frequency
         RaycastHit2D hitRight = Physics2D.Raycast(m_firepointRight.position, m_firepointRight.right, m_moveRange);
