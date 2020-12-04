@@ -3,16 +3,16 @@
 namespace Assets.Scripts {
     public class LeverInteraction : MonoBehaviour {
         [SerializeField]
-        private DoorInteraction m_doorInteraction;
+        private DoorInteraction m_doorInteraction; // Wrong naming ('m_'), private field must start with "_"
         [SerializeField]
-        private Animator m_animator;
+        private Animator m_animator; // Wrong naming ('m_'), private field must start with "_"
 
-        [SerializeField] private Material m_default;
-        [SerializeField] private Material m_outlined;
-        private bool m_materialState;
+        [SerializeField] private Material m_default; // Wrong naming ('m_'), private field must start with "_"
+        [SerializeField] private Material m_outlined; // Wrong naming ('m_'), private field must start with "_"
+        private bool m_materialState; // Wrong naming ('m_'), private field must start with "_"
 
         private void Start() {
-            GetComponent<Renderer>().material = m_default;
+            GetComponent<Renderer>().material = m_default; 
         }
 
         public void HandleLever() {
