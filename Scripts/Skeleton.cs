@@ -5,28 +5,28 @@ namespace Assets.Scripts
 {
     public class Skeleton : MonoBehaviour
     {
-        [SerializeField] private int m_health = 100;
-        [SerializeField] private int m_moveRange = 20;
-        [SerializeField] private int m_attackRange = 5;
+        [SerializeField] private int m_health = 100; // Wrong naming ('m_'), private field must start with "_"
+        [SerializeField] private int m_moveRange = 20; // Wrong naming ('m_'), private field must start with "_"
+        [SerializeField] private int m_attackRange = 5; // Wrong naming ('m_'), private field must start with "_" 
 
-        [Range(0, .3f)] [SerializeField] private float m_movementSmoothing = .05f;
-        [SerializeField] private float m_walkSpeed = 10f;
-        public float m_moveCoordinates;
-        [SerializeField] private Rigidbody2D m_rigidBody;
-        [SerializeField] private Animator m_animator;
+        [Range(0, .3f)] [SerializeField] private float m_movementSmoothing = .05f; // Wrong naming ('m_'), private field must start with "_"
+        [SerializeField] private float m_walkSpeed = 10f; // Wrong naming ('m_'), private field must start with "_"
+        public float m_moveCoordinates; // Wrong naming ('m_'), private field must start with "_"
+        [SerializeField] private Rigidbody2D m_rigidBody; // Wrong naming ('m_'), private field must start with "_"
+        [SerializeField] private Animator m_animator; // Wrong naming ('m_')
         [SerializeField] private GameObject m_projectile;
-        [SerializeField] private Transform m_firepointRight; //use for shoot the player and also for raycast
-        [SerializeField] private Transform m_firepointLeft; //use only for raycast - may be deleted - fix later
-        [SerializeField] private Transform m_firepoint;//because of the fucking Quaternion in firepoint right
+        [SerializeField] private Transform m_firepointRight; // Wrong naming ('m_')
+        [SerializeField] private Transform m_firepointLeft; // Wrong naming ('m_')
+        [SerializeField] private Transform m_firepoint; // Wrong naming ('m_')
         //DONT CHANGE FIREPOINTS POSITIONS
 
-        private Vector3 m_velocity = Vector3.zero;
+        private Vector3 m_velocity = Vector3.zero; // Wrong Vector3 is not velosity, ('m_') private field must start with "_"
 
-        private bool m_facingRight = true;
-        private bool m_moving;
-        private bool m_started = true; //????????????????????????
+        private bool m_facingRight = true; // Wrong naming ('m_'),You should name 'State' like '_isFacingRight'.  _isFacingRight
+        private bool m_moving; // Wrong naming ('m_'), You should name 'State' like '_isMoving'. 
+        private bool m_started = true;  // Wrong naming ('m_'), You should name 'State' like '_isStarted'. 
 
-        private enum State
+        private enum State // Wrong naming, You should name 'State' like 'AnimationState'. 
         {
             Idle,
             Walk,
@@ -34,7 +34,7 @@ namespace Assets.Scripts
             Die
         };
 
-        private State m_state = State.Idle;
+        private State m_state = State.Idle; // Wrong naming ('m_')
 
         public void TakeDamage(int damage)
         {
@@ -94,7 +94,7 @@ namespace Assets.Scripts
             }
         }
 
-        private void Eye()
+        private void Eye() //Wrong naming (Name of method talking nothing).
         {
             var angle = Mathf.Sin(Time.time * 100) * 360; //tweak this to change frequency
             RaycastHit2D hitRight = Physics2D.Raycast(m_firepointRight.position, m_firepointRight.right, m_moveRange);
