@@ -4,10 +4,10 @@ namespace Assets.Scripts
 {
     public class Projectile : MonoBehaviour
     {
-        [SerializeField] private float m_speed = 10f;
-        [SerializeField] private int m_damage = 10;
-
-        [SerializeField] private Rigidbody2D m_rigidBody;
+        [SerializeField] private float m_speed = 10f;  // Wrong naming ('m_'), private field must start with "_"
+        [SerializeField] private int m_damage = 10;  // Wrong naming ('m_'), private field must start with "_"
+ 
+        [SerializeField] private Rigidbody2D m_rigidBody;  // Wrong naming ('m_'), private field must start with "_"
 
         public enum Parent
         {
@@ -16,7 +16,7 @@ namespace Assets.Scripts
             Default
         };
 
-        [SerializeField] private Parent m_parent = Parent.Default;
+        [SerializeField] private Parent m_parent = Parent.Default;  // Wrong naming ('m_'), private field must start with "_"
 
         private void Start()
         {
@@ -33,7 +33,7 @@ namespace Assets.Scripts
                 if (player != null) player.TakeDamage(m_damage);
                 if (collision.gameObject.tag == "Player") Destroy(gameObject);
             }
-            if (collision.gameObject.layer == 8)
+            if (collision.gameObject.layer == 8)  // '8' what this number is?
             {
                 Destroy(gameObject);
             }
@@ -46,17 +46,15 @@ namespace Assets.Scripts
             {
                 Skeleton skeleton_archer = collision.gameObject.GetComponent<Skeleton>();
                 Melee_enemy melee_Enemy = collision.gameObject.GetComponent<Melee_enemy>();
-                if (skeleton_archer != null) skeleton_archer.TakeDamage(m_damage);
-                if (melee_Enemy != null) melee_Enemy.TakeDamage(m_damage);
+                if (skeleton_archer != null) skeleton_archer.TakeDamage(m_damage); //  if (skeleton_archer)
+                if (melee_Enemy != null) melee_Enemy.TakeDamage(m_damage); //  if (melee_Enemy)
                 if (collision.gameObject.tag == "Enemy") Destroy(gameObject);
             }
-            if (collision.gameObject.layer == 8)
+            if (collision.gameObject.layer == 8) // '8' what this number is?
             {
                 Destroy(gameObject);
             }
         }
-        //idk why projectile cnat be in one method.
-        //it doesnt detecting collision
 
         public void SetParent(Parent parent)
         {
